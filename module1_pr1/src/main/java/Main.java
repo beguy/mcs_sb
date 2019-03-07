@@ -1,7 +1,6 @@
 import java.util.Set;
 import java.util.function.BiPredicate;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -13,8 +12,8 @@ public class Main {
         };
     }
 
-    public static Supplier<Void> task2() {
-        return null;
+    public static void printHello() {
+        System.out.print("Hello");
     }
 
     public static Consumer<String> task3() {
