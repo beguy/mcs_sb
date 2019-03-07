@@ -2,6 +2,7 @@ import java.util.Set;
 import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Main {
     public static BiPredicate<Set<Character>, String> task1() {
@@ -17,6 +18,9 @@ public class Main {
     }
 
     public static Consumer<String> task3() {
-        return null;
+        return (string)->{
+            IntStream stream = string.chars();
+            stream.forEach(value -> System.out.print(value + " "));
+        };
     }
 }

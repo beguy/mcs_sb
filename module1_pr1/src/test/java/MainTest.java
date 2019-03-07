@@ -24,8 +24,14 @@ class MainTest {
     }
 
     @AfterEach
-    private void returnSystemOut(){
+    private void returnSystemOut() {
         System.setOut(originalPrintStream);
+    }
+
+    private String getSystemOutString(){
+        String tmp = systemOut.toString();
+        systemOut.reset();
+        return tmp;
     }
 
     @Test
@@ -44,13 +50,25 @@ class MainTest {
     }
 
     @Test
-    void task2(){
+    void task2() {
         Supplier<Void> printHello = () -> {
-             Main.printHello();
-             return null;
-         };
+            Main.printHello();
+            return null;
+        };
 
-         printHello.get();
-         assertEquals(systemOut.toString(), "Hello");
+        printHello.get();
+        assertEquals(getSystemOutString(), "Hello");
+    }
+
+    @Test
+    void task3() {
+        Main.task3().accept("abc");
+        assertEquals(getSystemOutString(), "97 98 99 ");
+
+        Main.task3().accept("$ !");
+        assertEquals(getSystemOutString(), "36 32 33 ");
+
+        Main.task3().accept("");
+        assertEquals(getSystemOutString(), "");
     }
 }
