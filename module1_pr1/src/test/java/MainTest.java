@@ -7,7 +7,6 @@ import java.io.PrintStream;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.BiPredicate;
-import java.util.function.Supplier;
 
 import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.*;
@@ -54,11 +53,13 @@ class MainTest {
 
     @Test
     void task2() {
+        voidSuplier printHello = Main::printHello;
+        /* Or like this
         Supplier<Void> printHello = () -> {
             Main.printHello();
             return null;
         };
-
+        */
         printHello.get();
         assertEquals(getSystemOutString(), "Hello");
     }
@@ -74,4 +75,9 @@ class MainTest {
         Main.task3().accept("");
         assertEquals(getSystemOutString(), "");
     }
+}
+
+@FunctionalInterface
+interface voidSuplier {
+    void get();
 }
