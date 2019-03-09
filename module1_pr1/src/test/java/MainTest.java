@@ -9,7 +9,9 @@ import java.util.Set;
 import java.util.function.BiPredicate;
 
 import static java.util.Arrays.asList;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * @author Viktor Kovalev pro@v-kovalev.ru
