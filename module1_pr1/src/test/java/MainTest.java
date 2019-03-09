@@ -12,6 +12,9 @@ import java.util.function.Supplier;
 import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * @author Viktor Kovalev pro@v-kovalev.ru
+ */
 class MainTest {
     private ByteArrayOutputStream systemOut = new ByteArrayOutputStream();
     private PrintStream originalPrintStream = System.out;
@@ -28,7 +31,7 @@ class MainTest {
         System.setOut(originalPrintStream);
     }
 
-    private String getSystemOutString(){
+    private String getSystemOutString() {
         String tmp = systemOut.toString();
         systemOut.reset();
         return tmp;

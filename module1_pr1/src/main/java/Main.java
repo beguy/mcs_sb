@@ -4,6 +4,9 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+/**
+ * @author Viktor Kovalev pro@v-kovalev.ru
+ */
 public class Main {
     public static BiPredicate<Set<Character>, String> task1() {
         return (alphabetSet, testString) -> {
