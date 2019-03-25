@@ -1,8 +1,11 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -25,6 +28,37 @@ class MainTest {
 
     @Test
     void xor() {
+        int matrixSize = 10;
+        boolean result = Main.xor(getIdentityMatrix(matrixSize));
+        assertEquals(false, result);
 
+        matrixSize = 11;
+        result = Main.xor(getIdentityMatrix(matrixSize));
+        assertEquals(true, result);
+
+        List<List<Boolean>> zeroMatrix = new ArrayList<>();
+        matrixSize = 10;
+        for (int i = 0; i < matrixSize; ++i) {
+            List<Boolean> tmpRow = IntStream
+                    .range(0, matrixSize)
+                    .mapToObj(integer -> false)
+                    .collect(Collectors.toList());
+            zeroMatrix.add(tmpRow);
+        }
+        result = Main.xor(zeroMatrix);
+        assertEquals(false, result);
+    }
+
+    private List<List<Boolean>> getIdentityMatrix(int size) {
+        List<List<Boolean>> identityMatrix = new ArrayList<>();
+        for (int i = 0; i < size; ++i) {
+            final int finalI = i;
+            List<Boolean> tmpRow = IntStream
+                    .range(0, size)
+                    .mapToObj(j -> (j != finalI) ? false : true)
+                    .collect(Collectors.toList());
+            identityMatrix.add(tmpRow);
+        }
+        return identityMatrix;
     }
 }
