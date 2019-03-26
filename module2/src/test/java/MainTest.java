@@ -9,6 +9,9 @@ import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * @author Viktor Kovalev pro@v-kovalev.ru
+ */
 class MainTest {
 
     @Test

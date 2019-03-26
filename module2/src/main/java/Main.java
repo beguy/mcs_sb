@@ -1,5 +1,8 @@
 import java.util.List;
 
+/**
+ * @author Viktor Kovalev pro@v-kovalev.ru
+ */
 public class Main {
     // task1
     public static int uniqueNumbers(List<? extends Number> numberList) {
