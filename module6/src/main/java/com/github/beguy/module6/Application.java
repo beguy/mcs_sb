@@ -4,6 +4,7 @@ import com.github.beguy.module6.accountType.AccountType;
 import com.github.beguy.module6.bank.Bank;
 import com.github.beguy.module6.bank.BankDao;
 import com.github.beguy.module6.client.Client;
+import com.github.beguy.module6.client.ClientDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -17,6 +18,8 @@ public class Application implements CommandLineRunner {
 
     @Autowired
     BankDao bankDao;
+    @Autowired
+    ClientDao clientDao;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -32,12 +35,15 @@ public class Application implements CommandLineRunner {
         Client ivanov = new Client("IVANOV");
         Client sidorov = new Client("SIDOROV");
         //TODO: replace with AccountDAO
-        accountTypeList.get(0).setClients(Arrays.asList(petrov, sidorov));
-        accountTypeList.get(1).setClients(Arrays.asList(ivanov));
+        accountTypeList.get(0).setClientEntities(Arrays.asList(petrov, sidorov));
+        accountTypeList.get(1).setClientEntities(Arrays.asList(ivanov));
         bank1.setAccounts(accountTypeList);
 
-        bankDao.addBank(bank1);
+        bankDao.save(bank1);
         System.out.println(bank1);
+
+        clientDao.findAll().forEach(System.out::println);
+        clientDao.delete(1);
     }
 
 }

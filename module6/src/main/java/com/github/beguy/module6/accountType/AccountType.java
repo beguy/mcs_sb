@@ -20,7 +20,10 @@ public class AccountType extends DomainObject {
     @OneToMany(mappedBy = "accountType",
             cascade = CascadeType.PERSIST,
             orphanRemoval = true)
-    private List<Client> clients = new ArrayList<>();
+    private List<Client> clientEntities = new ArrayList<>();
+
+    public AccountType() {
+    }
 
     public AccountType(String name) {
         super(name);
@@ -34,13 +37,13 @@ public class AccountType extends DomainObject {
         this.bank = bank;
     }
 
-    public List<Client> getClients() {
-        return clients;
+    public List<Client> getClientEntities() {
+        return clientEntities;
     }
 
-    public void setClients(List<Client> clients) {
-        clients.stream().forEach(client -> client.setAccountType(this));
-        this.clients = clients;
+    public void setClientEntities(List<Client> clientEntities) {
+        clientEntities.stream().forEach(client -> client.setAccountType(this));
+        this.clientEntities = clientEntities;
     }
 
     @Override
@@ -48,7 +51,7 @@ public class AccountType extends DomainObject {
         return new StringJoiner(", ", "\n\t{", "\n\t}")
                 .add(super.toString())
                 .add("bank=" + bank.getName())
-                .add("clients=" + clients)
+                .add("clientEntities=" + clientEntities)
                 .toString();
     }
 }

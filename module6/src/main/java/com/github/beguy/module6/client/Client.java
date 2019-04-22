@@ -12,6 +12,9 @@ public class Client extends DomainObject {
     @ManyToOne
     private AccountType accountType;
 
+    public Client() {
+    }
+
     public Client(String name) {
         super(name);
     }

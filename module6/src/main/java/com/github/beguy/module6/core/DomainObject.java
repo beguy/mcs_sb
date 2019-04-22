@@ -11,15 +11,18 @@ public class DomainObject {
     @Id
     // for unique Id per table
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected int id;
+    protected long id;
 
     protected String name;
+
+    public DomainObject() {
+    }
 
     protected DomainObject(String name) {
         this.name = name;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

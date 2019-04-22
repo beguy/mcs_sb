@@ -15,6 +15,9 @@ public class Bank extends DomainObject {
     @OneToMany(mappedBy = "bank", cascade = CascadeType.PERSIST)
     private List<AccountType> accounts = new ArrayList<>();
 
+    public Bank() {
+    }
+
     public Bank(String name) {
         super(name);
     }
