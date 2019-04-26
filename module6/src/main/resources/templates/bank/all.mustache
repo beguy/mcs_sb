@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/table.css">
+    <title>Banks</title>
+</head>
+
+<body>
+<h2>Banks</h2>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Manage</th>
+    </tr>
+
+    {{#banks}}
+        <tr>
+            <td>{{id}}</td>
+            <td>{{name}}</td>
+            <td>
+                <form name="delete" action="/bank/delete/{{id}}" method="get">
+                    <input type="submit" value="delete"/>
+                </form>
+                <form name="edit" action="/bank/edit" method="post">
+                    <input type="hidden" name="id" value="{{id}}"/>
+                    <label>Name <input type="text" name="name" value="{{name}}"/></label>
+                    <input type="submit" value="update"/>
+                </form>
+            </td>
+        </tr>
+    {{/banks}}
+</table>
+
+<form name="bank" action="/bank/add" method="post">
+    Name: <input type="text" name="name"/><br/>
+    <input type="submit" value="add"/>
+</form>
+</body>
+</html>
