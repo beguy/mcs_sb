@@ -28,7 +28,7 @@ public class ClientDao {
     }
 
     public void delete(long id) {
-        em.createQuery("delete from Client c where c.id=:id").setParameter("id", id).executeUpdate();
+        em.remove(em.find(Client.class, id));
     }
 
     public List<Client> findAll() {

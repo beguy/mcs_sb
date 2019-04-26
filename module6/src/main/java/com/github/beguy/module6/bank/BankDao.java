@@ -18,6 +18,10 @@ public class BankDao {
         em.persist(bank);
     }
 
+    public void update(Bank bank) {
+        em.merge(bank);
+    }
+
     public void addBankByName(String name) {
         Bank bank = new Bank(name);
         em.persist(bank);
@@ -28,7 +32,11 @@ public class BankDao {
     }
 
     public void delete(long id) {
-        em.createQuery("delete from Bank c where c.id=:id").setParameter("id", id).executeUpdate();
+        em.remove(em.find(Bank.class, id));
+    }
+
+    public Bank findById(long id) {
+        return em.find(Bank.class, id);
     }
 
     public List<Bank> findAll() {

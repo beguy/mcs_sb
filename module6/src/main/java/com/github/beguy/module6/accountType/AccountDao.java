@@ -28,7 +28,7 @@ public class AccountDao {
     }
 
     public void delete(long id) {
-        em.createQuery("delete from AccountType c where c.id=:id").setParameter("id", id).executeUpdate();
+        em.remove(em.find(AccountType.class, id));
     }
 
     public List<AccountType> findAll() {
