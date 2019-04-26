@@ -17,9 +17,7 @@ public class AccountType extends DomainObject {
     @ManyToOne
     private Bank bank;
 
-    @OneToMany(mappedBy = "accountType",
-            cascade = CascadeType.PERSIST,
-            orphanRemoval = true)
+    @OneToMany(mappedBy = "accountType", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Client> clientEntities = new ArrayList<>();
 
     public AccountType() {

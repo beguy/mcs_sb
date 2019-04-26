@@ -12,7 +12,7 @@ import java.util.StringJoiner;
 
 @Entity
 public class Bank extends DomainObject {
-    @OneToMany(mappedBy = "bank", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "bank", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<AccountType> accounts = new ArrayList<>();
 
     public Bank() {
