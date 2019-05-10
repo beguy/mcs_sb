@@ -12,5 +12,10 @@
       </set>
     </option>
     <option name="configurationPath" value="" />
+    <option name="exclusions">
+      <set>
+        <option value=".*\.*.js" />
+      </set>
+    </option>
   </component>
 </project>
