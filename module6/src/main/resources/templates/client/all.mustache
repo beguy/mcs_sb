@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/table.css">
+    <title>Clients</title>
+</head>
+
+<body>
+<h2>Clients</h2>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>AccountType</th>
+        <th>Manage</th>
+    </tr>
+
+    {{#clients}}
+        <tr>
+            <td>{{id}}</td>
+            <td>{{name}}</td>
+            <td>{{#accountType}}
+                {{id}} {{name}}
+            {{/accountType}}
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td>
+                            <form name="edit" action="/client/edit" method="post">
+                                <input type="hidden" name="id" value="{{id}}"/>
+                                <label>Name <input type="text" name="name" value="{{name}}"/></label>
+                                <select class="selectWithSynchronizedId
+                                selected={{#accountType}}{{id}}{{/accountType}}" name="accountTypeId">
+                                {{#accountTypes}}
+                                    <option value={{id}}>
+                                        [{{id}}] {{name}} in {{bank.name}}
+                                    </option>
+                                {{/accountTypes}}
+                                </select>
+                                <input type="submit" value="update"/>
+                            </form>
+                        </td>
+                        <td>
+                            <form name="delete" action="/client/{{id}}/delete/" method="get">
+                                <input type="submit" value="delete"/>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    {{/clients}}
+</table>
+
+<form name="client" action="/client/add" method="post">
+    <label>Name <input type="text" name="name"/></label>
+    <select name="accountTypeId">
+        {{#accountTypes}}
+            <option value={{id}}>
+                [{{id}}] {{name}} in {{bank.name}}
+            </option>
+        {{/accountTypes}}
+    </select>
+    <input type="submit" value="add"/>
+</form>
+
+<script src="js/helpers.js"></script>
+<script>synchronizeSelectId()</script>
+</body>
+</html>
