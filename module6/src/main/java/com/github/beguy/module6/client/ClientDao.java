@@ -31,6 +31,14 @@ public class ClientDao {
         em.remove(em.find(Client.class, id));
     }
 
+    public void update(Client client) {
+        em.merge(client);
+    }
+
+    public Client findById(long id) {
+        return em.find(Client.class, id);
+    }
+
     public List<Client> findAll() {
         Query query = em.createQuery(
                 "from Client c");

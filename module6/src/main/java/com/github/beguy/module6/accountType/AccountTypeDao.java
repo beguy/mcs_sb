@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class AccountDao {
+public class AccountTypeDao {
     @PersistenceContext
     private EntityManager em;
 
@@ -29,6 +29,14 @@ public class AccountDao {
 
     public void delete(long id) {
         em.remove(em.find(AccountType.class, id));
+    }
+
+    public void update(AccountType accountType) {
+        em.merge(accountType);
+    }
+
+    public AccountType findById(long id) {
+        return em.find(AccountType.class, id);
     }
 
     public List<AccountType> findAll() {
