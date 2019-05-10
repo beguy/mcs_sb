@@ -23,7 +23,7 @@ public class BankController {
         return "/bank/all";
     }
 
-    @GetMapping("/bank/delete/{id}")
+    @GetMapping("/bank/{id}/delete/")
     public String deleteUser(@PathVariable("id") long id, Model model) {
         bankDao.delete(id);
         return "redirect:/banks";
@@ -43,7 +43,7 @@ public class BankController {
     @PostMapping("/bank/edit")
     public String updateBank(@Valid Bank bank, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("error", "can't delete this bank " + bank);
+            model.addAttribute("error", "can't edit this bank " + bank);
             return "/error";
         }
 
