@@ -10,44 +10,43 @@
 </head>
 
 <body>
-
-<h2>Clients</h2>
+<h2>Account Types</h2>
 <table>
     <tr>
         <th>Id</th>
         <th>Name</th>
-        <th><a href="/accountTypes">AccountType</a></th>
+        <th><a href="/banks">Bank</a></th>
         <th>Action</th>
     </tr>
 
-    {{#clients}}
+    {{#accountTypes}}
         <tr>
             <td>{{id}}</td>
             <td>{{name}}</td>
-            <td>{{#accountType}}
+            <td>{{#bank}}
                 {{id}} {{name}}
-            {{/accountType}}
+            {{/bank}}
             </td>
             <td>
                 <table>
                     <tr>
                         <td>
-                            <form name="edit" action="/client/edit" method="post">
+                            <form name="edit" action="/accountType/edit" method="post">
                                 <input type="hidden" name="id" value="{{id}}"/>
                                 <label>Name <input type="text" name="name" value="{{name}}"/></label>
                                 <select class="selectWithSynchronizedId
-                                selected={{#accountType}}{{id}}{{/accountType}}" name="accountType.id">
-                                {{#accountTypes}}
+                                selected={{#bank}}{{id}}{{/bank}}" name="bank.id">
+                                {{#banks}}
                                     <option value={{id}}>
-                                        [{{id}}] {{name}} in {{bank.name}}
+                                        [{{id}}] {{name}}
                                     </option>
-                                {{/accountTypes}}
+                                {{/banks}}
                                 </select>
                                 <input type="submit" value="update"/>
                             </form>
                         </td>
                         <td>
-                            <form name="delete" action="/client/{{id}}/delete/" method="get">
+                            <form name="delete" action="/accountType/{{id}}/delete/" method="get">
                                 <input type="submit" value="delete"/>
                             </form>
                         </td>
@@ -55,17 +54,17 @@
                 </table>
             </td>
         </tr>
-    {{/clients}}
+    {{/accountTypes}}
 </table>
 
-<form name="client" action="/client/add" method="post">
+<form name="accountType" action="/accountType/add" method="post">
     <label>Name <input type="text" name="name"/></label>
-    <select name="accountType.id">
-        {{#accountTypes}}
+    <select name="bank.id">
+        {{#banks}}
             <option value={{id}}>
-                [{{id}}] {{name}} in {{bank.name}}
+                [{{id}}] {{name}}
             </option>
-        {{/accountTypes}}
+        {{/banks}}
     </select>
     <input type="submit" value="add"/>
 </form>
