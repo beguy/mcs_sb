@@ -8,6 +8,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
@@ -15,9 +16,10 @@ import java.util.StringJoiner;
 @Entity
 public class AccountType extends DomainObject {
     @ManyToOne
+    @NotNull
     private Bank bank;
 
-    @OneToMany(mappedBy = "accountType", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToMany(mappedBy = "accountType", cascade = CascadeType.REMOVE)
     private List<Client> clientEntities = new ArrayList<>();
 
     public AccountType() {

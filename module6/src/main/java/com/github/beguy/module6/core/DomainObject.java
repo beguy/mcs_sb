@@ -5,12 +5,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.StringJoiner;
 
 @MappedSuperclass
 public class DomainObject {
     @Id
     // for unique Id per table
+    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long id;
 

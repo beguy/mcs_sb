@@ -5,11 +5,13 @@ import com.github.beguy.module6.core.DomainObject;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 import java.util.StringJoiner;
 
 @Entity
 public class Client extends DomainObject {
     @ManyToOne
+    @NotNull
     private AccountType accountType;
 
     public Client() {

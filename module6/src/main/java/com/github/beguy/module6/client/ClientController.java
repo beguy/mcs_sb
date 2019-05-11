@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -34,25 +33,23 @@ public class ClientController {
     }
 
     @PostMapping("/client/add")
-    public String addClient(@Valid Client client, @ModelAttribute(value = "accountTypeId") long accountTypeId, BindingResult result, Model model) {
+    public String addClient(@Valid Client client, BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("error", "can't add this client " + client);
             return "/error";
         }
 
-        client.setAccountType(accountTypeDao.findById(accountTypeId));
         clientDao.save(client);
         return "redirect:/clients";
     }
 
     @PostMapping("/client/edit")
-    public String updateClient(@Valid Client client, @ModelAttribute(value = "accountTypeId") long accountTypeId, BindingResult result, Model model) {
+    public String updateClient(@Valid Client client, BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("error", "can't edit this client " + client);
             return "/error";
         }
 
-        client.setAccountType(accountTypeDao.findById(accountTypeId));
         clientDao.update(client);
         return "redirect:/clients";
     }
