@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.github.beguy</groupId>
-    <artifactId>module6</artifactId>
+    <artifactId>module6-7</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>module6</name>
+    <name>module6-7</name>
     <description>Spring JPA Application</description>
 
     <properties>
