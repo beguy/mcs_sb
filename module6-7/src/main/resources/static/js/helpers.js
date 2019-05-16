@@ -15,3 +15,8 @@ function synchronizeSelectId() {
         select.selectedIndex = optionIndex;
     });
 }
+function setFormInputDateToday(){
+    Array.from(document.getElementsByClassName('newDatePicker')).forEach(
+        inputDate=>inputDate.valueAsDate=new Date()
+    )
+}

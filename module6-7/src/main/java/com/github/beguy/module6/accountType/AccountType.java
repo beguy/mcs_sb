@@ -42,7 +42,7 @@ public class AccountType extends DomainObject {
     }
 
     public void setClientEntities(List<Client> clientEntities) {
-        clientEntities.stream().forEach(client -> client.setAccountType(this));
+        clientEntities.forEach(client -> client.setAccountType(this));
         this.clientEntities = clientEntities;
     }
 
@@ -50,7 +50,7 @@ public class AccountType extends DomainObject {
     public String toString() {
         return new StringJoiner(", ", "\n\t{", "\n\t}")
                 .add(super.toString())
-                .add("bank=" + bank.getName())
+                .add("bank=" + bank)
                 .add("clientEntities=" + clientEntities)
                 .toString();
     }
