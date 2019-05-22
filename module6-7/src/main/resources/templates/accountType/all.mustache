@@ -18,26 +18,31 @@
         <th>Id</th>
         <th>Name</th>
         <th><a href="/banks">Bank</a></th>
+        <th><a href="/clients">Clients</a></th>
         <th>Action</th>
     </tr>
 
-    {{#accountTypes}}
+    {{#accountTypeInfo}}
         <tr>
-            <td>{{id}}</td>
-            <td>{{name}}</td>
-            <td>{{#bank}}
-                {{id}} {{name}}
-            {{/bank}}
+            <td>{{accountType.id}}</td>
+            <td>{{accountType.name}}</td>
+            <td>
+                {{#accountType.bank}}
+                    {{id}} {{name}}
+                {{/accountType.bank}}
+            </td>
+            <td>
+                {{clientsAmount}}
             </td>
             <td>
                 <table>
                     <tr>
                         <td>
                             <form name="edit" action="/accountType/edit" method="post">
-                                <input type="hidden" name="id" value="{{id}}"/>
-                                <label>Name <input type="text" name="name" value="{{name}}"/></label>
+                                <input type="hidden" name="id" value="{{accountType.id}}"/>
+                                <label>Name <input type="text" name="name" value="{{accountType.name}}"/></label>
                                 <select class="selectWithSynchronizedId
-                                selected={{#bank}}{{id}}{{/bank}}" name="bank.id">
+                                selected={{#accountType.bank}}{{id}}{{/accountType.bank}}" name="bank.id">
                                 {{#banks}}
                                     <option value={{id}}>
                                         [{{id}}] {{name}}
@@ -48,7 +53,7 @@
                             </form>
                         </td>
                         <td>
-                            <form name="delete" action="/accountType/{{id}}/delete/" method="get">
+                            <form name="delete" action="/accountType/{{accountType.id}}/delete/" method="get">
                                 <input type="submit" value="delete"/>
                             </form>
                         </td>
@@ -56,7 +61,7 @@
                 </table>
             </td>
         </tr>
-    {{/accountTypes}}
+    {{/accountTypeInfo}}
 </table>
 
 <form name="accountType" action="/accountType/add" method="post">

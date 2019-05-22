@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -19,10 +20,26 @@ public class AccountTypeController {
     @Autowired
     private BankDao bankDao;
 
+//    @GetMapping("/accountTypes")
+//    public String showAll(Model model) {
+//        List<AccountType> accountTypes = accountTypeDao.findAll();
+//        model.addAttribute("accountTypes", accountTypes);
+//        model.addAttribute("banks", bankDao.findAll());
+//        return "/accountType/all";
+//    }
+
     @GetMapping("/accountTypes")
     public String showAll(Model model) {
         List<AccountType> accountTypes = accountTypeDao.findAll();
-        model.addAttribute("accountTypes", accountTypes);
+        List<Integer> clientsAmount = accountTypeDao.clientsAmount();
+        List<AccountTypeInfoDto> accountTypeInfoDtos = new LinkedList<>();
+        //Decorate without creating DTO
+        for (int i = 0; i < accountTypes.size(); ++i){
+            AccountTypeInfoDto accountTypeInfoDto = new AccountTypeInfoDto(accountTypes.get(i), clientsAmount.get(i));
+            accountTypeInfoDtos.add(accountTypeInfoDto);
+        }
+
+        model.addAttribute("accountTypeInfo", accountTypeInfoDtos);
         model.addAttribute("banks", bankDao.findAll());
         return "/accountType/all";
     }
