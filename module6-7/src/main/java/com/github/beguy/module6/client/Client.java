@@ -6,11 +6,13 @@ import com.github.beguy.module6.core.DomainObject;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.util.StringJoiner;
 
 @Entity
+@Table(name = "CLIENTS")
 public class Client extends DomainObject {
     @ManyToOne
     @NotNull
@@ -46,7 +48,6 @@ public class Client extends DomainObject {
     public String toString() {
         return new StringJoiner(", ", "\n\t\t{", "\n\t\t}")
                 .add(super.toString())
-                .add("accountType=" + accountType)
                 .add("accountDate=" + accountDate)
                 .toString();
     }

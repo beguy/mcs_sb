@@ -8,12 +8,14 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
 @Entity
+@Table(name = "ACCOUNT_TYPE")
 public class AccountType extends DomainObject {
     @ManyToOne
     @NotNull
@@ -50,7 +52,6 @@ public class AccountType extends DomainObject {
     public String toString() {
         return new StringJoiner(", ", "\n\t{", "\n\t}")
                 .add(super.toString())
-                .add("bank=" + bank)
                 .add("clientEntities=" + clientEntities)
                 .toString();
     }

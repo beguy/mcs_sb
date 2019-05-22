@@ -6,11 +6,13 @@ import com.github.beguy.module6.core.DomainObject;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
 @Entity
+@Table(name = "BANK")
 public class Bank extends DomainObject {
     @OneToMany(mappedBy = "bank", cascade = CascadeType.REMOVE)
     private List<AccountType> accounts = new ArrayList<>();
