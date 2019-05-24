@@ -1,7 +1,7 @@
 package com.github.beguy.module6.client;
 
 import com.github.beguy.module6.accountType.AccountType;
-import com.github.beguy.module6.core.DomainObject;
+import com.github.beguy.module6.core.Entity.DomainObject;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
