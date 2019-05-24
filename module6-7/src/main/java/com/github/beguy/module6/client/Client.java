@@ -5,6 +5,7 @@ import com.github.beguy.module6.core.Entity.DomainObject;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -15,6 +16,7 @@ import java.util.StringJoiner;
 @Table(name = "CLIENTS")
 public class Client extends DomainObject {
     @ManyToOne
+    @JoinColumn(name = "ACCOUNT_TYPE_ID")
     @NotNull
     private AccountType accountType;
 

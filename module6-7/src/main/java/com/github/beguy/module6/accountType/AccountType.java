@@ -6,6 +6,7 @@ import com.github.beguy.module6.core.Entity.DomainObject;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -18,6 +19,7 @@ import java.util.StringJoiner;
 @Table(name = "ACCOUNT_TYPE")
 public class AccountType extends DomainObject {
     @ManyToOne
+    @JoinColumn(name = "BANK_ID")
     @NotNull
     private Bank bank;
 

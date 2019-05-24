@@ -1,5 +1,6 @@
 package com.github.beguy.module6.core.Entity;
 
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -10,12 +11,14 @@ import java.util.StringJoiner;
 
 @MappedSuperclass
 public class DomainObject {
+    @Column(name = "ID")
     @Id
     // for unique Id per table
     @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long id;
 
+    @Column(name = "NAME")
     @NotBlank(message = "Name is mandatory")
     protected String name;
 
