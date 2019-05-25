@@ -2,7 +2,7 @@ package com.github.beguy.module6.accountType;
 
 import com.github.beguy.module6.bank.Bank;
 import com.github.beguy.module6.client.Client;
-import com.github.beguy.module6.core.Entity.DomainObject;
+import com.github.beguy.module6.core.entity.DomainObject;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;

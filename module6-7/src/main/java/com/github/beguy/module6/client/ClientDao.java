@@ -1,6 +1,7 @@
 package com.github.beguy.module6.client;
 
-import com.github.beguy.module6.core.Dao.RequestFilterToHqlCriteria;
+import com.github.beguy.module6.core.dao.RequestFilterToHqlCriteria;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -21,6 +22,7 @@ public class ClientDao {
     @PersistenceContext
     private EntityManager em;
 
+    @CacheEvict
     public long save(Client client) {
         em.persist(client);
         return client.getId();
@@ -30,14 +32,17 @@ public class ClientDao {
         return em.find(Client.class, id);
     }
 
+    @CacheEvict
     public void delete(Client client) {
         em.remove(client);
     }
 
+    @CacheEvict
     public void delete(long id) {
         em.remove(em.find(Client.class, id));
     }
 
+    @CacheEvict
     public void update(Client client) {
         em.merge(client);
     }
@@ -56,7 +61,7 @@ public class ClientDao {
         // Learning crunch, see: MapSqlParameterSource
         StringBuilder queryString = new StringBuilder("select c from Client c where ");
         // Available filters
-        Map<String, RequestFilterToHqlCriteria> requestToCriteria = Stream.of(new String[][]{
+        Map<String, RequestFilterToHqlCriteria> filterRequestToCriteriaMap = Stream.of(new String[][]{
                         {"accountType", "c.accountType.name=:accountType"},
                         {"accountTypeNameContains", "c.accountType.name like '%'||:accountTypeNameContains||'%'"},
                         {"accountTypeNameStartWith", "c.accountType.name like :accountTypeNameStartWith||'%'"},
@@ -66,7 +71,7 @@ public class ClientDao {
 
         // Build special filters.
         SimpleDateFormat dateFormatter = new SimpleDateFormat("y-M-d");
-        RequestFilterToHqlCriteria accountDate = requestToCriteria.get("accountDate");
+        RequestFilterToHqlCriteria accountDate = filterRequestToCriteriaMap.get("accountDate");
         accountDate.setJpqlCriteriaStringGenerator((thiz, requestParameter) -> {
             if (requestParameter.equals("today")) {
                 return "c.accountDate=current_date()";
@@ -88,9 +93,9 @@ public class ClientDao {
 
         List<RequestFilterToHqlCriteria> handledFilters = filters.entrySet()
                 .stream()
-                .filter(entry -> requestToCriteria.containsKey(entry.getKey()))
+                .filter(entry -> filterRequestToCriteriaMap.containsKey(entry.getKey()))
                 .map(entry -> {
-                    RequestFilterToHqlCriteria tmpCriteria = (RequestFilterToHqlCriteria) requestToCriteria.get(entry.getKey()).clone();
+                    RequestFilterToHqlCriteria tmpCriteria = (RequestFilterToHqlCriteria) filterRequestToCriteriaMap.get(entry.getKey()).clone();
                     tmpCriteria.setRequestParameter(entry.getValue());
                     return tmpCriteria;
                 })

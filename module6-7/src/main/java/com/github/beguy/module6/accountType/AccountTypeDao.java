@@ -1,5 +1,6 @@
 package com.github.beguy.module6.accountType;
 
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -14,23 +15,28 @@ public class AccountTypeDao {
     @PersistenceContext
     private EntityManager em;
 
+    @CacheEvict
     public void save(AccountType accountType) {
         em.persist(accountType);
     }
 
+    @CacheEvict
     public void addAccounTypeByName(String name) {
         AccountType accountType = new AccountType(name);
         em.persist(accountType);
     }
 
+    @CacheEvict
     public void delete(AccountType accountType) {
         em.remove(accountType);
     }
 
+    @CacheEvict
     public void delete(long id) {
         em.remove(em.find(AccountType.class, id));
     }
 
+    @CacheEvict
     public void update(AccountType accountType) {
         em.merge(accountType);
     }

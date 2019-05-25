@@ -1,4 +1,4 @@
-package com.github.beguy.module6.core.Dao;
+package com.github.beguy.module6.core.dao;
 
 import javax.persistence.Query;
 import java.util.function.BiConsumer;

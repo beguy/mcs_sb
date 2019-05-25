@@ -1,4 +1,4 @@
-package com.github.beguy.module6.core.Entity;
+package com.github.beguy.module6.core.entity;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
