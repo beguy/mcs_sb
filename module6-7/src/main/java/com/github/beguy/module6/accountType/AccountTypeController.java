@@ -31,7 +31,7 @@ public class AccountTypeController {
     @GetMapping("/accountTypes")
     public String showAll(Model model) {
         List<AccountType> accountTypes = accountTypeDao.findAll();
-        List<Integer> clientsAmount = accountTypeDao.clientsAmount();
+        List<Long> clientsAmount = accountTypeDao.clientsAmount();
         List<AccountTypeInfoDto> accountTypeInfoDtos = new LinkedList<>();
         //Decorate without creating DTO
         for (int i = 0; i < accountTypes.size(); ++i){

@@ -45,8 +45,8 @@ public class AccountTypeDao {
         return query.getResultList();
     }
 
-    public List<Integer> clientsAmount() {
-        Query query = em.createQuery("select size(a.clientEntities) from AccountType a group by a.id");
+    public List<Long> clientsAmount() {
+        Query query = em.createQuery("select count(c.id) from AccountType a left join Client c on a.id=c.accountType group by a.id");
         return query.getResultList();
     }
 }
