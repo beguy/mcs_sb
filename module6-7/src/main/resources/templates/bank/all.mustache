@@ -12,43 +12,53 @@
 <body>
 {{> navigation}}
 <main>
-<h2>Banks</h2>
-<table>
-    <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Action</th>
-    </tr>
-
-    {{#banks}}
+    <h2>Banks</h2>
+    <table>
         <tr>
-            <td>{{id}}</td>
-            <td>{{name}}</td>
-            <td>
-                <table>
-                    <tr>
-                        <td>
-                            <form name="edit" action="/bank/edit" method="post">
-                                <input type="hidden" name="id" value="{{id}}"/>
-                                <label>Name <input type="text" name="name" value="{{name}}"/></label>
-                                <input type="submit" value="update"/>
-                            </form>
-                        </td>
-                        <td>
-                            <form name="delete" action="/bank/{{id}}/delete/" method="get">
-                                <input type="submit" value="delete"/>
-                            </form>
-                        </td>
-                    </tr>
-                </table>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Action</th>
         </tr>
-    {{/banks}}
-</table>
 
-<form name="bank" action="/bank/add" method="post">
-    Name: <input type="text" name="name"/><br/>
-    <input type="submit" value="add"/>
-</form>
+        {{#banks}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{name}}</td>
+                <td>
+                    <table class="no-border">
+                        <tr>
+                            <td>
+                                <form hidden="true" name="edit" action="/bank/edit" method="post">
+                                    <input type="hidden" name="id" value="{{id}}"/>
+                                    <label>Name <input type="text" name="name" value="{{name}}"/></label>
+                                    <input class="material-icons" type="submit" value="update"/>
+                                </form>
+                                <input class="material-icons unhideForm" type="submit" value="update"/>
+                            </td>
+                            <td>
+                                <form name="delete" action="/bank/{{id}}/delete/" method="get">
+                                    <input class="material-icons" type="submit" value="delete"/>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+            </tr>
+        {{/banks}}
+    </table>
+
+    <div>
+        <form hidden="true" name="bank" action="/bank/add" method="post">
+            <table class="no-border" style="">
+                <tr>
+                    <td>Name: <input type="text" name="name"/><br/></td>
+                    <td><input class="material-icons" type="submit" value="add"/></td>
+                </tr>
+            </table>
+        </form>
+        <input class="material-icons unhideForm" type="submit" value="add"/>
+    </div>
+
 </main>
+<script src="js/helpers.js"></script>
 </body>
 </html>

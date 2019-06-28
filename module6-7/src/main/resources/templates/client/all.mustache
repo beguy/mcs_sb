@@ -11,74 +11,104 @@
 <body>
 {{> navigation}}
 <main>
-<h2>Clients</h2>
-<table>
-    <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th><a href="/accountTypes">AccountType</a></th>
-        <th>Account Date</th>
-        <th>Action</th>
-    </tr>
-
-    {{#clients}}
+    <h2>Clients</h2>
+    <table>
         <tr>
-            <td>{{id}}</td>
-            <td>{{name}}</td>
-            <td>{{#accountType}}
-                {{id}} {{name}}
-            {{/accountType}}
-            </td>
-            <td>{{accountDate}}</td>
-            <td>
-                <table>
+            <th>Id</th>
+            <th>Name</th>
+            <th>
+                <table class="no-border">
                     <tr>
-                        <td>
-                            <form name="edit" action="/client/edit" method="post">
-                                <input type="hidden" name="id" value="{{id}}"/>
-                                <label>Name <input type="text" name="name" value="{{name}}"/></label>
-                                <select class="selectWithSynchronizedId
-                                selected={{#accountType}}{{id}}{{/accountType}}" name="accountType.id">
-                                {{#accountTypes}}
-                                    <option value={{id}}>
-                                        [{{id}}] {{name}} in {{bank.name}}
-                                    </option>
-                                {{/accountTypes}}
-                                </select>
-                                <label>Account Date <input type="date" name="accountDate" value="{{accountDate}}"></label>
-                                <input type="submit" value="update"/>
-                            </form>
-                        </td>
-                        <td>
-                            <form name="delete" action="/client/{{id}}/delete/" method="get">
-                                <input type="submit" value="delete"/>
-                            </form>
-                        </td>
+                        <td><a href="/accountTypes">AccountType</a></td>
+                        <td><input class="material-icons unhideForm" type="submit" value="filter_list"
+                                   hidden="true"></td>
                     </tr>
                 </table>
-            </td>
+            </th>
+            <th>
+                <table class="no-border">
+                    <tr>
+                        <td>Account Date</td>
+                        <td><input class="material-icons unhideForm" type="submit" value="filter_list"></td>
+                    </tr>
+                </table>
+            </th>
+            <th>Action</th>
         </tr>
-    {{/clients}}
-</table>
+        {{#clients}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{name}}</td>
+                <td>{{#accountType}}
+                    {{id}} {{name}}
+                {{/accountType}}
+                </td>
+                <td>{{accountDate}}</td>
+                <td>
+                    <table class="no-border">
+                        <tr>
+                            <td>
+                                <form hidden="true" name="edit" action="/client/edit" method="post">
+                                    <input type="hidden" name="id" value="{{id}}"/>
+                                    <label>Name <input type="text" name="name" value="{{name}}"/></label>
+                                    <select class="selectWithSynchronizedId
+                                selected={{#accountType}}{{id}}{{/accountType}}" name="accountType.id">
+                                    {{#accountTypes}}
+                                        <option value={{id}}>
+                                            [{{id}}] {{name}} in {{bank.name}}
+                                        </option>
+                                    {{/accountTypes}}
+                                    </select>
+                                    <label>Account Date <input type="date" name="accountDate"
+                                                               value="{{accountDate}}"></label>
+                                    <input class="material-icons" type="submit" value="update"/>
+                                </form>
+                                <input class="material-icons  unhideForm" type="submit" value="update"/>
+                            </td>
+                            <td>
+                                <form name="delete" action="/client/{{id}}/delete/" method="get">
+                                    <input class="material-icons" type="submit" value="delete"/>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        {{/clients}}
+    </table>
 
-<form name="client" action="/client/add" method="post">
-    <label>Name <input type="text" name="name"/></label>
-    <select name="accountType.id">
-        {{#accountTypes}}
-            <option value={{id}}>
-                [{{id}}] {{name}} in {{bank.name}}
-            </option>
-        {{/accountTypes}}
-    </select>
-    <label>Account Date <input class="newDatePicker" type="date" name="accountDate"></label>
-    <input type="submit" value="add"/>
-</form>
 
+    <form hidden="true" name="client" action="/client/add" method="post">
+        <table class="no-border">
+            <tr>
+                <td>
+                    <label>Name <input type="text" name="name"/></label>
+                </td>
+                <td>
+                    <select name="accountType.id">
+                        {{#accountTypes}}
+                            <option value={{id}}>
+                                [{{id}}] {{name}} in {{bank.name}}
+                            </option>
+                        {{/accountTypes}}
+                    </select>
+                </td>
+                <td>
+                    <label>Account Date <input class="newDatePicker" type="date" name="accountDate"></label>
+                </td>
+                <td>
+                    <input class="material-icons" type="submit" value="add"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <input class="material-icons unhideForm" type="submit" value="add"/>
+
+</main>
 <script src="js/helpers.js"></script>
 <script>
     synchronizeSelectId();
     setFormInputDateToday();
 </script>
-</main>
 </body>
 </html>
