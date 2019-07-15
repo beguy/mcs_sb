@@ -1,16 +1,32 @@
 package com.github.beguy.module6.accountType;
 
+import com.github.beguy.module6.bank.Bank;
+
 public class AccountTypeInfoDto {
-    private final AccountType accountType;
+    private final long id;
+    private final String name;
+    private final Bank bank;
+
     private final Long clientsAmount;
 
     AccountTypeInfoDto(AccountType accountType, Long clientsAmount){
-        this.accountType = accountType;
+        this.id = accountType.getId();
+        this.name = accountType.getName();
+        this.bank = accountType.getBank();
+
         this.clientsAmount = clientsAmount;
     }
 
-    public AccountType getAccountType() {
-        return accountType;
+    public long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Bank getBank() {
+        return bank;
     }
 
     public Long getClientsAmount() {

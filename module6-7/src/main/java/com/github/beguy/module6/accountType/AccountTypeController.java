@@ -1,6 +1,6 @@
 package com.github.beguy.module6.accountType;
 
-import com.github.beguy.module6.bank.BankDao;
+import com.github.beguy.module6.bank.BankRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,37 +16,30 @@ import java.util.List;
 @Controller
 public class AccountTypeController {
     @Autowired
-    private AccountTypeDao accountTypeDao;
-    @Autowired
-    private BankDao bankDao;
+    private AccountTypeRepository accountTypeRepository;
 
-//    @GetMapping("/accountTypes")
-//    public String showAll(Model model) {
-//        List<AccountType> accountTypes = accountTypeDao.findAll();
-//        model.addAttribute("accountTypes", accountTypes);
-//        model.addAttribute("banks", bankDao.findAll());
-//        return "/accountType/all";
-//    }
+    @Autowired
+    private BankRepository bankRepository;
 
     @GetMapping("/accountTypes")
     public String showAll(Model model) {
-        List<AccountType> accountTypes = accountTypeDao.findAll();
-        List<Long> clientsAmount = accountTypeDao.clientsAmount();
+        List<AccountType> accountTypes = accountTypeRepository.findAll();
+        List<Long> clientsAmount = accountTypeRepository.clientsAmount();
         List<AccountTypeInfoDto> accountTypeInfoDtos = new LinkedList<>();
-        //Decorate without creating DTO
+        //Decorate to Dto
         for (int i = 0; i < accountTypes.size(); ++i){
             AccountTypeInfoDto accountTypeInfoDto = new AccountTypeInfoDto(accountTypes.get(i), clientsAmount.get(i));
             accountTypeInfoDtos.add(accountTypeInfoDto);
         }
 
         model.addAttribute("accountTypeInfo", accountTypeInfoDtos);
-        model.addAttribute("banks", bankDao.findAll());
-        return "/accountType/all";
+        model.addAttribute("banks", bankRepository.findAll());
+        return "/accountTypes";
     }
 
     @GetMapping("/accountType/{id}/delete/")
     public String deleteUser(@PathVariable("id") long id, Model model) {
-        accountTypeDao.delete(id);
+        accountTypeRepository.deleteById(id);
         return "redirect:/accountTypes";
     }
 
@@ -57,7 +50,7 @@ public class AccountTypeController {
             return "/error";
         }
 
-        accountTypeDao.save(accountType);
+        accountTypeRepository.save(accountType);
         return "redirect:/accountTypes";
     }
 
@@ -68,7 +61,7 @@ public class AccountTypeController {
             return "/error";
         }
 
-        accountTypeDao.update(accountType);
+        accountTypeRepository.update(accountType);
         return "redirect:/accountTypes";
     }
 }

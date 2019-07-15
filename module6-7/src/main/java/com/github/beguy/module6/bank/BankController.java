@@ -14,18 +14,18 @@ import java.util.List;
 @Controller
 public class BankController {
     @Autowired
-    private BankDao bankDao;
+    private BankRepository bankRepository;
 
     @GetMapping("/banks")
     public String showAll(Model model) {
-        List<Bank> banks = bankDao.findAll();
+        List<Bank> banks = bankRepository.findAll();
         model.addAttribute("banks", banks);
-        return "/bank/all";
+        return "/banks";
     }
 
     @GetMapping("/bank/{id}/delete/")
     public String deleteUser(@PathVariable("id") long id, Model model) {
-        bankDao.delete(id);
+        bankRepository.deleteById(id);
         return "redirect:/banks";
     }
 
@@ -36,7 +36,7 @@ public class BankController {
             return "/error";
         }
 
-        bankDao.save(bank);
+        bankRepository.save(bank);
         return "redirect:/banks";
     }
 
@@ -47,7 +47,7 @@ public class BankController {
             return "/error";
         }
 
-        bankDao.update(bank);
+        bankRepository.update(bank);
         return "redirect:/banks";
     }
 }

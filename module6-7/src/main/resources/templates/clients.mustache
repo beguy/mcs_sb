@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/core.css">
+    <title>Clients</title>
+</head>
+<body>
+{{> navigation}}
+<main>
+    <h2>Clients</h2>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>
+                <table class="no-border">
+                    <tr>
+                        <td><a href="/accountTypes">AccountType</a></td>
+                        <td>
+                            <form id="search" action="/clients/search/" method="get"
+                                  onsubmit="return sendSearchForm(this)"></form>
+                            <table hidden class="no-border">
+                                <tr>
+                                    <td>
+                                        <select form="search" name="accountTypeName"
+                                                onchange="handleSelectWithParam(this)">
+                                            <option value="" selected disabled hidden>choose here</option>
+                                            {{#accountTypes}}
+                                                <option value={{name}}>
+                                                    {{name}} [{{id}}]
+                                                </option>
+                                            {{/accountTypes}}
+                                            {{!-- Selects with param:--}}
+                                            <option value="like">like: (your string)</option>
+                                            <option value="startWith">start with: (your string)</option>
+                                            <option value="endWith">ends with: (your string)</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input hidden disabled form="search" type="text" name="accountTypeNameInput"
+                                               value="">
+                                    </td>
+                                    <td>
+                                        <input form="search" class="material-icons" type="submit" value="filter_list"
+                                               title="apply all filters"/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <input class="material-icons unhideForm" type="submit" value="filter_list"
+                                   title="filter by account type">
+                        </td>
+                    </tr>
+                </table>
+            </th>
+            <th>
+                <table class="no-border">
+                    <tr>
+                        <td>Account Date</td>
+                        <td>
+                            <table hidden class="no-border">
+                                <tr>
+                                    <td>
+                                        <input disabled form="search" class="todayDatePicker" type="date"
+                                               name="accountDate">
+                                    </td>
+                                    <td>
+                                        <input form="search" class="material-icons" type="submit" value="filter_list"
+                                               title="apply all filters"/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <input class="material-icons unhideForm" type="submit" value="filter_list"
+                                   title="filter by account date"
+                                   onclick="document.forms.search['accountDate'].disabled = false;">
+                        </td>
+                    </tr>
+                </table>
+            </th>
+            <th>Action</th>
+        </tr>
+        {{#clients}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{name}}</td>
+                <td>{{#accountType}}
+                    <p title="id = {{id}}">{{name}}</p>
+                {{/accountType}}
+                </td>
+                <td>{{accountDate}}</td>
+                <td>
+                    <table class="no-border">
+                        <tr>
+                            <td>
+                                <form hidden name="edit" action="/client/edit" method="post">
+                                    <input type="hidden" name="id" value="{{id}}"/>
+                                    <label>Name <input type="text" name="name" value="{{name}}"/></label>
+                                    <select class="selectWithSynchronizedId
+                                selected={{#accountType}}{{id}}{{/accountType}}" name="accountType.id">
+                                    {{#accountTypes}}
+                                        <option value={{id}}>
+                                            [{{id}}] {{name}} in {{bank.name}}
+                                        </option>
+                                    {{/accountTypes}}
+                                    </select>
+                                    <label>Account Date <input type="date" name="accountDate"
+                                                               value="{{accountDate}}"></label>
+                                    <input class="material-icons" type="submit" value="update" title="update client"/>
+                                </form>
+                                <input class="material-icons  unhideForm" type="submit" value="update"
+                                       title="update client"/>
+                            </td>
+                            <td>
+                                <form name="delete" action="/client/{{id}}/delete/" method="get">
+                                    <input class="material-icons" type="submit" value="delete" title="delete client"/>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        {{/clients}}
+    </table>
+
+
+    <form hidden name="client" action="/client/add" method="post">
+        <table class="no-border">
+            <tr>
+                <td>
+                    <label>Name <input type="text" name="name"/></label>
+                </td>
+                <td>
+                    <select name="accountType.id">
+                        {{#accountTypes}}
+                            <option value={{id}}>
+                                [{{id}}] {{name}} in {{bank.name}}
+                            </option>
+                        {{/accountTypes}}
+                    </select>
+                </td>
+                <td>
+                    <label>Account Date <input class="todayDatePicker" type="date" name="accountDate"></label>
+                </td>
+                <td>
+                    <input class="material-icons" type="submit" value="add" title="add client"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <input class="material-icons unhideForm" type="submit" value="add" title="add client"/>
+
+</main>
+<script src="/js/helpers.js"></script>
+<script>
+    function handleSelectWithParam(select) {
+        if (select.value == 'like' || select.value == 'startWith' || select.value == 'endWith') {
+            document.forms["search"]["accountTypeNameInput"].hidden = false;
+            document.forms["search"]["accountTypeNameInput"].disabled = false;
+            // delete "(your string)"
+            selectedOption = select.selectedOptions[0];
+            selectedOption.text = selectedOption.text.split(":")[0];
+        } else {
+            document.forms["search"]["accountTypeNameInput"].hidden = true;
+            document.forms["search"]["accountTypeNameInput"].disabled = true;
+        }
+    }
+
+    function sendSearchForm(form) {
+        accountTypeName = form["accountTypeName"];
+        accountTypeNameInput = form["accountTypeNameInput"];
+        if (accountTypeNameInput.disabled == false) {
+            switch (accountTypeName.value) {
+                case "like" :
+                    accountTypeNameInput.name = "accountTypeNameContains";
+                    break;
+                case "startWith" :
+                    accountTypeNameInput.name = "accountTypeNameStartsWith";
+                    break;
+                case "endWith" :
+                    accountTypeNameInput.name = "accountTypeNameEndsWith";
+                    break;
+            }
+            accountTypeName.disabled = true;
+        }
+
+        accountDate = form["accountDate"];
+
+        return true;
+    }
+
+    function setFormInputDateToday() {
+        Array.from(document.getElementsByClassName('todayDatePicker')).forEach(
+                inputDate => inputDate.valueAsDate = new Date()
+        )
+    }
+
+    bindUnhideFormButtonsToParentHiddenForm(document.querySelectorAll(".unhideForm"));
+    synchronizeSelectId();
+    setFormInputDateToday();
+</script>
+</body>
+</html>

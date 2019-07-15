@@ -16,28 +16,24 @@ function synchronizeSelectId() {
     });
 }
 
-function setFormInputDateToday() {
-    Array.from(document.getElementsByClassName('newDatePicker')).forEach(
-        inputDate => inputDate.valueAsDate = new Date()
-    )
-}
-
-bindUnhideFormButtonsToParentHiddenForm(document.querySelectorAll(".unhideForm"));
-
 function bindUnhideFormButtonsToParentHiddenForm(unhideButtonNodeList) {
     unhideButtonNodeList.forEach(
         function (unhideFormButton, currentIndex, listObj) {
+            let originalFn = unhideFormButton.onclick;
             unhideFormButton.onclick = function () {
-                unhideAll(unhideFormButton.parentElement);
+                unhideAndEnableAll(unhideFormButton.parentElement);
                 // remove .unhideForm button after click
                 unhideFormButton.parentNode.removeChild(unhideFormButton);
+                if (originalFn != null)
+                    return originalFn.apply(this, arguments);
             }
         });
 }
 
-function unhideAll(parentElement) {
+function unhideAndEnableAll(parentElement) {
     parentElement.childNodes.forEach(
         function (currentValue, currentIndex, listObj) {
             currentValue.hidden = false;
+            currentValue.disabled = false;
         });
 }

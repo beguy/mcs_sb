@@ -1,6 +1,6 @@
 package com.github.beguy.module6.client;
 
-import com.github.beguy.module6.accountType.AccountTypeDao;
+import com.github.beguy.module6.accountType.AccountTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,31 +16,31 @@ import java.util.Map;
 @Controller
 public class ClientController {
     @Autowired
-    private ClientDao clientDao;
+    private ClientRepository clientRepository;
 
     @Autowired
-    private AccountTypeDao accountTypeDao;
+    private AccountTypeRepository accountTypeRepository;
 
-    @GetMapping("/clients/filter")
+    @GetMapping("/clients/search/")
     public String clientsWithAccountDate(
             @RequestParam Map<String, String> predicateConditions,
             Model model){
-        model.addAttribute("accountTypes", accountTypeDao.findAll());
-        model.addAttribute("clients", clientDao.findAll(predicateConditions));
-        return "/client/all";
+        model.addAttribute("accountTypes", accountTypeRepository.findAll());
+        model.addAttribute("clients", clientRepository.findAll(predicateConditions));
+        return "/clients";
     }
 
 
     @GetMapping("/clients")
     public String showAll(Model model) {
-        model.addAttribute("accountTypes", accountTypeDao.findAll());
-        model.addAttribute("clients", clientDao.findAll());
-        return "/client/all";
+        model.addAttribute("accountTypes", accountTypeRepository.findAll());
+        model.addAttribute("clients", clientRepository.findAll());
+        return "/clients";
     }
 
     @GetMapping("/client/{id}/delete/")
     public String deleteUser(@PathVariable("id") long id, Model model) {
-        clientDao.delete(id);
+        clientRepository.deleteById(id);
         return "redirect:/clients";
     }
 
@@ -51,7 +51,7 @@ public class ClientController {
             return "/error";
         }
 
-        clientDao.save(client);
+        clientRepository.save(client);
         return "redirect:/clients";
     }
 
@@ -62,7 +62,7 @@ public class ClientController {
             return "/error";
         }
 
-        clientDao.update(client);
+        clientRepository.update(client);
         return "redirect:/clients";
     }
 }

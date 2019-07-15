@@ -11,18 +11,18 @@ Copyright 2015 Google, Inc. All Rights Reserved.
 </metadata>
 <defs>
 <font id="MaterialIcons-Regular" horiz-adv-x="512" >
-  <font-face 
-    font-family="Material Icons"
-    font-weight="400"
-    font-stretch="normal"
-    units-per-em="512"
-    panose-1="2 0 5 3 0 0 0 0 0 0"
-    ascent="512"
-    descent="0"
-    bbox="0 0 512 512"
-    underline-thickness="50"
-    underline-position="-100"
-    unicode-range="U+0030-10FFFD"
+  <font-face
+          font-family="Material Icons"
+          font-weight="400"
+          font-stretch="normal"
+          units-per-entityManager="512"
+          panose-1="2 0 5 3 0 0 0 0 0 0"
+          ascent="512"
+          descent="0"
+          bbox="0 0 512 512"
+          underline-thickness="50"
+          underline-position="-100"
+          unicode-range="U+0030-10FFFD"
   />
     <missing-glyph />
     <glyph glyph-name="3d_rotation" unicode="&#x33;d_rotation" 
