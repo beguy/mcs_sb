@@ -1,12 +1,10 @@
 package com.github.beguy.module6.bank;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
-public interface BankRepository extends CrudRepository<Bank, Long> {
-    @Override
-    List<Bank> findAll();
-
-    Bank update(Bank bank);
+public interface BankRepository extends JpaRepository<Bank, Long> {
+//    @Override
+//    List<Bank> findAll();
+//
+//    Bank update(Bank bank);
 }

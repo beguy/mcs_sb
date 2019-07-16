@@ -95,7 +95,7 @@
                     <table class="no-border">
                         <tr>
                             <td>
-                                <form hidden name="edit" action="/client/edit" method="post">
+                                <form hidden name="edit" action="/client/save" method="post">
                                     <input type="hidden" name="id" value="{{id}}"/>
                                     <label>Name <input type="text" name="name" value="{{name}}"/></label>
                                     <select class="selectWithSynchronizedId
@@ -126,7 +126,7 @@
     </table>
 
 
-    <form hidden name="client" action="/client/add" method="post">
+    <form hidden name="client" action="/client/save" method="post">
         <table class="no-border">
             <tr>
                 <td>

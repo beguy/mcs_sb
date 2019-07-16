@@ -14,9 +14,8 @@ public class DomainObject {
     @Column(name = "ID")
     @Id
     // for unique Id per table
-    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected long id;
+    protected @NotNull Long id;
 
     @Column(name = "NAME")
     @NotBlank(message = "Name is mandatory")
@@ -29,11 +28,11 @@ public class DomainObject {
         this.name = name;
     }
 
-    public long getId() {
+    public @NotNull Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(@NotNull Long id) {
         this.id = id;
     }
 

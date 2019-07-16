@@ -24,30 +24,19 @@ public class BankController {
     }
 
     @GetMapping("/bank/{id}/delete/")
-    public String deleteUser(@PathVariable("id") long id, Model model) {
+    public String delete(@PathVariable("id") long id, Model model) {
         bankRepository.deleteById(id);
         return "redirect:/banks";
     }
 
-    @PostMapping("/bank/add")
-    public String addBank(@Valid Bank bank, BindingResult result, Model model) {
+    @PostMapping("/bank/save")
+    public String save(@Valid Bank bank, BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("error", "can't add this bank " + bank);
             return "/error";
         }
 
         bankRepository.save(bank);
-        return "redirect:/banks";
-    }
-
-    @PostMapping("/bank/edit")
-    public String updateBank(@Valid Bank bank, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            model.addAttribute("error", "can't edit this bank " + bank);
-            return "/error";
-        }
-
-        bankRepository.update(bank);
         return "redirect:/banks";
     }
 }

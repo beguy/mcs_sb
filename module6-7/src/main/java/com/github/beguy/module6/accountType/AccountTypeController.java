@@ -38,30 +38,19 @@ public class AccountTypeController {
     }
 
     @GetMapping("/accountType/{id}/delete/")
-    public String deleteUser(@PathVariable("id") long id, Model model) {
+    public String delete(@PathVariable("id") long id, Model model) {
         accountTypeRepository.deleteById(id);
         return "redirect:/accountTypes";
     }
 
-    @PostMapping("/accountType/add")
-    public String addAccountType(@Valid AccountType accountType, BindingResult result, Model model) {
+    @PostMapping("/accountType/save")
+    public String save(@Valid AccountType accountType, BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("error", "can't add this accountType " + accountType);
             return "/error";
         }
 
         accountTypeRepository.save(accountType);
-        return "redirect:/accountTypes";
-    }
-
-    @PostMapping("/accountType/edit")
-    public String updateAccountType(@Valid AccountType accountType, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            model.addAttribute("error", "can't delete this accountType " + accountType);
-            return "/error";
-        }
-
-        accountTypeRepository.update(accountType);
         return "redirect:/accountTypes";
     }
 }
