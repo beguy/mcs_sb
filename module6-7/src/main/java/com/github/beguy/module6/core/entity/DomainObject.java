@@ -6,7 +6,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.StringJoiner;
 
 @MappedSuperclass
@@ -15,7 +14,7 @@ public class DomainObject {
     @Id
     // for unique Id per table
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected @NotNull Long id;
+    protected long id;
 
     @Column(name = "NAME")
     @NotBlank(message = "Name is mandatory")
@@ -28,11 +27,11 @@ public class DomainObject {
         this.name = name;
     }
 
-    public @NotNull Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(@NotNull Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

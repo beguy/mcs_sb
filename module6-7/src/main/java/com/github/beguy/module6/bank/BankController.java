@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 public class BankController {
@@ -18,8 +17,7 @@ public class BankController {
 
     @GetMapping("/banks")
     public String showAll(Model model) {
-        List<Bank> banks = bankRepository.findAll();
-        model.addAttribute("banks", banks);
+        model.addAttribute("banks", bankRepository.findAll());
         return "/banks";
     }
 

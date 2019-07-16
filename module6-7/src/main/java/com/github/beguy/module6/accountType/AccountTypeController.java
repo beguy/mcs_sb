@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-import java.util.LinkedList;
-import java.util.List;
 
 @Controller
 public class AccountTypeController {
@@ -23,16 +21,7 @@ public class AccountTypeController {
 
     @GetMapping("/accountTypes")
     public String showAll(Model model) {
-        List<AccountType> accountTypes = accountTypeRepository.findAll();
-        List<Long> clientsAmount = accountTypeRepository.clientsAmount();
-        List<AccountTypeInfoDto> accountTypeInfoDtos = new LinkedList<>();
-        //Decorate to Dto
-        for (int i = 0; i < accountTypes.size(); ++i){
-            AccountTypeInfoDto accountTypeInfoDto = new AccountTypeInfoDto(accountTypes.get(i), clientsAmount.get(i));
-            accountTypeInfoDtos.add(accountTypeInfoDto);
-        }
-
-        model.addAttribute("accountTypeInfo", accountTypeInfoDtos);
+        model.addAttribute("accountTypeInfo", accountTypeRepository.getAllInfo());
         model.addAttribute("banks", bankRepository.findAll());
         return "/accountTypes";
     }

@@ -18,6 +18,11 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Map;
 
+import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.contains;
+import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.endsWith;
+import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.exact;
+import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.startsWith;
+
 @Controller
 public class ClientController {
     @Autowired
@@ -65,27 +70,29 @@ public class ClientController {
         if (predicateConditions.containsKey("accountTypeName")) {
             String accountTypeName = predicateConditions.get("accountTypeName");
             clientTmp.setAccountType(new AccountType(accountTypeName));
-            matcher.withMatcher("accountType.name", match -> match.exact());
+            matcher = matcher.withMatcher("accountType.name", exact());
         } else if (predicateConditions.containsKey("accountTypeNameContains")) {
             String accountTypeName = predicateConditions.get("accountTypeNameContains");
             clientTmp.setAccountType(new AccountType(accountTypeName));
-            matcher.withMatcher("accountTypeNameContains", match -> match.contains());
+            matcher = matcher.withMatcher("accountType.name", contains());
         } else if (predicateConditions.containsKey("accountTypeNameStartsWith")) {
             String accountTypeName = predicateConditions.get("accountTypeNameStartsWith");
             clientTmp.setAccountType(new AccountType(accountTypeName));
-            matcher.withMatcher("accountType.name", match -> match.startsWith());
+            matcher = matcher.withMatcher("accountType.name", startsWith());
         } else if (predicateConditions.containsKey("accountTypeNameEndsWith")) {
             String accountTypeName = predicateConditions.get("accountTypeNameEndsWith");
             clientTmp.setAccountType(new AccountType(accountTypeName));
-            matcher.withMatcher("accountType.name", match -> match.endsWith());
+            matcher = matcher.withMatcher("accountType.name", endsWith());
         }
 
         if (predicateConditions.containsKey("accountDate")) {
             clientTmp.setAccountDate(Date.valueOf(LocalDate.parse(predicateConditions.get("accountDate"))));
-            matcher.withMatcher("accountDate", match -> match.exact());
+            matcher = matcher.withMatcher("accountDate", exact());
         }
 
-        Example<Client> example = Example.of(clientTmp, matcher.withIgnoreNullValues());
+        // Cause long is primitive and not null.
+        matcher = matcher.withIgnorePaths("id", "accountType.id").withIgnoreNullValues();
+        Example<Client> example = Example.of(clientTmp, matcher);
 
         model.addAttribute("accountTypes", accountTypeRepository.findAll());
         model.addAttribute("clients", clientRepository.findAll(example));

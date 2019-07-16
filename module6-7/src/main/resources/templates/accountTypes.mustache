@@ -27,9 +27,7 @@
                 <td>{{id}}</td>
                 <td>{{name}}</td>
                 <td>
-                    {{#bank}}
-                        <p title="id = {{id}}">{{name}}</p>
-                    {{/bank}}
+                    <p title="id = {{bankId}}">{{bankName}}</p>
                 </td>
                 <td>
                     {{clientsAmount}}
@@ -42,7 +40,7 @@
                                     <input type="hidden" name="id" value="{{id}}"/>
                                     <label>Name <input type="text" name="name" value="{{name}}"/></label>
                                     <select class="selectWithSynchronizedId
-                                selected={{#bank}}{{id}}{{/bank}}" name="bank.id">
+                                selected={{bankId}}" name="bank.id">
                                     {{#banks}}
                                         <option value={{id}}>
                                             [{{id}}] {{name}}
