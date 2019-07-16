@@ -31,7 +31,7 @@
                                             <option value="" selected disabled hidden>choose here</option>
                                             {{#accountTypes}}
                                                 <option value={{name}}>
-                                                    {{name}} [{{id}}]
+                                                    {{name}}
                                                 </option>
                                             {{/accountTypes}}
                                             {{!-- Selects with param:--}}
@@ -172,12 +172,29 @@
 </main>
 <script src="/js/helpers.js"></script>
 <script>
+    function removeDuplicatesInAccountTypeSearchSelect() {
+        let select = document.forms.search["accountTypeName"];
+        let oldOptionsArray = Array.from(select.options);
+        let optionsValueSet = new Set();
+        let deletedCounter = 0;
+
+        for (let i = 0; i < oldOptionsArray.length; ++i) {
+            let optionsValue = oldOptionsArray[i].value;
+            if (optionsValueSet.has(optionsValue)) {
+                select.options.remove(i - deletedCounter);
+                ++deletedCounter;
+            } else {
+                optionsValueSet.add(optionsValue);
+            }
+        }
+    }
+
     function handleSelectWithParam(select) {
         if (select.value == 'like' || select.value == 'startWith' || select.value == 'endWith') {
             document.forms["search"]["accountTypeNameInput"].hidden = false;
             document.forms["search"]["accountTypeNameInput"].disabled = false;
             // delete "(your string)"
-            selectedOption = select.selectedOptions[0];
+            let selectedOption = select.selectedOptions[0];
             selectedOption.text = selectedOption.text.split(":")[0];
         } else {
             document.forms["search"]["accountTypeNameInput"].hidden = true;
@@ -186,8 +203,8 @@
     }
 
     function sendSearchForm(form) {
-        accountTypeName = form["accountTypeName"];
-        accountTypeNameInput = form["accountTypeNameInput"];
+        let accountTypeName = form["accountTypeName"];
+        let accountTypeNameInput = form["accountTypeNameInput"];
         if (accountTypeNameInput.disabled == false) {
             switch (accountTypeName.value) {
                 case "like" :
@@ -202,9 +219,6 @@
             }
             accountTypeName.disabled = true;
         }
-
-        accountDate = form["accountDate"];
-
         return true;
     }
 
@@ -214,6 +228,7 @@
         )
     }
 
+    removeDuplicatesInAccountTypeSearchSelect();
     bindUnhideFormButtonsToParentHiddenForm(document.querySelectorAll(".unhideForm"));
     synchronizeSelectId();
     setFormInputDateToday();
