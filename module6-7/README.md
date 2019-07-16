@@ -1,3 +1,8 @@
+## VideoDemo
+Youtube:
+
+[![VIDEO](README_SRC/Sberbank_Learn_Project_Demo.gif)](https://www.youtube.com/watch?v=pkGWJ_qg9Bc)
+
 ## 6 модуль
 
 Дана база данных с тремя таблицами. Банк (BANK), тип счета (ACCOUNT_TYPE) и клиенты (CLIENTS). (см. рис1)
