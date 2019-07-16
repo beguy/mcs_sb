@@ -52,7 +52,7 @@ public class AccountType extends DomainObject {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", "\n\t{", "\n\t}")
+        return new StringJoiner(", ", "{", "}")
                 .add(super.toString())
                 .add("clientEntities=" + clientEntities)
                 .toString();

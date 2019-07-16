@@ -35,7 +35,7 @@ public class Bank extends DomainObject {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", "\n{", "\n}")
+        return new StringJoiner(", ", "{", "}")
                 .add(super.toString())
                 .add("accounts=" + accounts)
                 .toString();

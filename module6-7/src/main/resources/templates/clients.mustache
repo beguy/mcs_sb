@@ -95,21 +95,38 @@
                     <table class="no-border">
                         <tr>
                             <td>
-                                <form hidden name="edit" action="/client/save" method="post">
-                                    <input type="hidden" name="id" value="{{id}}"/>
-                                    <label>Name <input type="text" name="name" value="{{name}}"/></label>
-                                    <select class="selectWithSynchronizedId
-                                selected={{#accountType}}{{id}}{{/accountType}}" name="accountType.id">
-                                    {{#accountTypes}}
-                                        <option value={{id}}>
-                                            [{{id}}] {{name}} in {{bank.name}}
-                                        </option>
-                                    {{/accountTypes}}
-                                    </select>
-                                    <label>Account Date <input type="date" name="accountDate"
-                                                               value="{{accountDate}}"></label>
-                                    <input class="material-icons" type="submit" value="update" title="update client"/>
-                                </form>
+                                <table hidden>
+                                    <form name="edit" action="/client/save" method="post">
+                                        <input type="hidden" name="id" value="{{id}}"/>
+                                        <tr>
+                                            <td>Name</td>
+                                            <td><input type="text" name="name" value="{{name}}"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Account Type</td>
+                                            <td>
+                                                <select class="selectWithSynchronizedId
+                                                selected={{#accountType}}{{id}}{{/accountType}}" name="accountType.id">
+                                                {{#accountTypes}}
+                                                    <option value={{id}}>
+                                                        [{{id}}] {{name}} in {{bank.name}}
+                                                    </option>
+                                                {{/accountTypes}}
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Account Date</td>
+                                            <td><input type="date" name="accountDate" value="{{accountDate}}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <input class="material-icons" type="submit" value="update"
+                                                       title="update client"/>
+                                            </td>
+                                        </tr>
+                                    </form>
+                                </table>
                                 <input class="material-icons  unhideForm" type="submit" value="update"
                                        title="update client"/>
                             </td>

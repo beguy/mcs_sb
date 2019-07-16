@@ -48,7 +48,7 @@ public class Client extends DomainObject {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", "\n\t\t{", "\n\t\t}")
+        return new StringJoiner(", ", "{", "}")
                 .add(super.toString())
                 .add("accountDate=" + accountDate)
                 .toString();
