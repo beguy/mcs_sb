@@ -19,7 +19,6 @@
             <th>Name</th>
             <th><a href="/banks">Bank</a></th>
             <th><a href="/clients">Clients</a></th>
-            <th>Action</th>
         </tr>
 
         {{#accountTypeInfo}}
@@ -32,57 +31,9 @@
                 <td>
                     {{clientsAmount}}
                 </td>
-                <td>
-                    <table class="no-border">
-                        <tr>
-                            <td>
-                                <form hidden name="edit" action="/accountType/save" method="post">
-                                    <input type="hidden" name="id" value="{{id}}"/>
-                                    <label>Name <input type="text" name="name" value="{{name}}"/></label>
-                                    <select class="selectWithSynchronizedId
-                                selected={{bankId}}" name="bank.id">
-                                    {{#banks}}
-                                        <option value={{id}}>
-                                            [{{id}}] {{name}}
-                                        </option>
-                                    {{/banks}}
-                                    </select>
-                                    <input class="material-icons" type="submit" value="update"
-                                           title="update account type"/>
-                                </form>
-                                <input class="material-icons unhideForm" type="submit" value="update"
-                                       title="update account type"/>
-                            </td>
-                            <td>
-                                <form name="delete" action="/accountType/{{id}}/delete/" method="get">
-                                    <input class="material-icons" type="submit" value="delete"
-                                           title="delete account type"/>
-                                </form>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
             </tr>
         {{/accountTypeInfo}}
     </table>
-
-    <form hidden name="accountType" action="/accountType/save" method="post">
-        <label>Name <input type="text" name="name"/></label>
-        <select name="bank.id">
-            {{#banks}}
-                <option value={{id}}>
-                    [{{id}}] {{name}}
-                </option>
-            {{/banks}}
-        </select>
-        <input class="material-icons" type="submit" value="add" title="add account type"/>
-    </form>
-    <input class="material-icons unhideForm" type="submit" value="add" title="add account type"/>
 </main>
-<script src="/js/helpers.js"></script>
-<script>
-    bindUnhideFormButtonsToParentHiddenForm(document.querySelectorAll(".unhideForm"));
-    synchronizeSelectId()
-</script>
 </body>
 </html>

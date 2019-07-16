@@ -17,52 +17,16 @@
         <tr>
             <th>Id</th>
             <th>Name</th>
-            <th>Action</th>
         </tr>
 
         {{#banks}}
             <tr>
                 <td>{{id}}</td>
                 <td>{{name}}</td>
-                <td>
-                    <table class="no-border">
-                        <tr>
-                            <td>
-                                <form hidden name="edit" action="/bank/save" method="post">
-                                    <input type="hidden" name="id" value="{{id}}"/>
-                                    <label>Name <input type="text" name="name" value="{{name}}"/></label>
-                                    <input class="material-icons" type="submit" value="update" title="update bank"/>
-                                </form>
-                                <input class="material-icons unhideForm" type="submit" value="update"
-                                       title="update bank"/>
-                            </td>
-                            <td>
-                                <form name="delete" action="/bank/{{id}}/delete/" method="get">
-                                    <input class="material-icons" type="submit" value="delete" title="delete bank"/>
-                                </form>
-                            </td>
-                        </tr>
-                    </table>
             </tr>
         {{/banks}}
     </table>
-
-    <div>
-        <form hidden name="bank" action="/bank/save" method="post">
-            <table class="no-border" style="">
-                <tr>
-                    <td>Name: <input type="text" name="name"/><br/></td>
-                    <td><input class="material-icons" type="submit" value="add" title="add bank"/></td>
-                </tr>
-            </table>
-        </form>
-        <input class="material-icons unhideForm" type="submit" value="add" title="add bank"/>
-    </div>
-
 </main>
-<script src="/js/helpers.js"></script>
-<script>
-    bindUnhideFormButtonsToParentHiddenForm(document.querySelectorAll(".unhideForm"));
-</script>
+
 </body>
 </html>
