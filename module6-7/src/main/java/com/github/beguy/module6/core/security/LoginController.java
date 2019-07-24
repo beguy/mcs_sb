@@ -30,10 +30,11 @@ public class LoginController {
     }
 
     @PostMapping
-    public void authenticate(@RequestParam Map<String, String> map) throws Exception {
+    public String authenticate(@RequestParam Map<String, String> map) throws Exception {
         Authentication result = new UsernamePasswordAuthenticationToken(
                 map.get("username"), map.get("password"),
                 AuthorityUtils.commaSeparatedStringToAuthorityList("MANAGER"));
         SecurityContextHolder.getContext().setAuthentication(result);
+        return "login";
     }
 }

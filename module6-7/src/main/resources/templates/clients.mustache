@@ -53,7 +53,7 @@
                                 </tr>
                             </table>
                             <input class="material-icons unhideForm" type="submit" value="filter_list"
-                                   title="filter by account type">
+                                   title="filter by value type">
                         </td>
                     </tr>
                 </table>
@@ -76,12 +76,13 @@
                                 </tr>
                             </table>
                             <input class="material-icons unhideForm" type="submit" value="filter_list"
-                                   title="filter by account date"
+                                   title="filter by value date"
                                    onclick="document.forms.search['accountDate'].disabled = false;">
                         </td>
                     </tr>
                 </table>
             </th>
+            <th>Account</th>
             <th>Action</th>
         </tr>
         {{#clients}}
@@ -93,6 +94,7 @@
                 {{/accountType}}
                 </td>
                 <td>{{accountDate}}</td>
+                <td>{{account.value}}</td>
                 <td>
                     <table class="no-border">
                         <tr>
@@ -123,6 +125,27 @@
                                             <td><input type="date" name="accountDate" value="{{accountDate}}"></td>
                                         </tr>
                                         <tr>
+                                            <td>Account</td>
+                                            <td><input type="text" name="account.value" value="{{account.value}}"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Minimal Account For Service Fee</td>
+                                            <td><input type="text" name="account.minimalAccountForServiceFee"
+                                                       value="{{account.minimalAccountForServiceFee}}"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Service Fee Percent</td>
+                                            <td><input type="text" name="account.serviceFeePercent"
+                                                       value="{{account.serviceFeePercent}}"/>%
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Service Fee Period</td>
+                                            <td><input type="text" name="account.serviceFeePeriod"
+                                                       value="{{account.serviceFeePeriod}}"/> days
+                                            </td>
+                                        </tr>
+                                        <tr>
                                             <td colspan="2">
                                                 <input class="material-icons" type="submit" value="update"
                                                        title="update client"/>
@@ -144,15 +167,16 @@
             </tr>
         {{/clients}}
     </table>
-
-
+    <br>
     <form hidden name="client" action="/client/save" method="post">
         <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
-        <table class="no-border">
+        <table style="width:50%; marign:unset">
             <tr>
-                <td>
-                    <label>Name <input type="text" name="name"/></label>
-                </td>
+                <td>Name</td>
+                <td><input type="text" name="name"/></td>
+            </tr>
+            <tr>
+                <td>Account Type</td>
                 <td>
                     <select name="accountType.id">
                         {{#accountTypes}}
@@ -162,10 +186,29 @@
                         {{/accountTypes}}
                     </select>
                 </td>
-                <td>
-                    <label>Account Date <input class="todayDatePicker" type="date" name="accountDate"></label>
-                </td>
-                <td>
+            </tr>
+            <tr>
+                <td>Account Date</td>
+                <td><input type="date" class="todayDatePicker" name="accountDate"></td>
+            </tr>
+            <tr>
+                <td>Account</td>
+                <td><input type="text" name="account.value" value="0.0"/></td>
+            </tr>
+            <tr>
+                <td>Minimal Account For Service Fee</td>
+                <td><input type="text" name="account.minimalAccountForServiceFee" value="0.0"/></td>
+            </tr>
+            <tr>
+                <td>Service Fee Percent</td>
+                <td><input type="text" name="account.serviceFeePercent" value="0"/>%</td>
+            </tr>
+            <tr>
+                <td>Service Fee Period</td>
+                <td><input type="text" name="account.serviceFeePeriod" value="0"/> days</td>
+            </tr>
+            <tr>
+                <td colspan="2">
                     <input class="material-icons" type="submit" value="add" title="add client"/>
                 </td>
             </tr>

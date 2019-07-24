@@ -49,17 +49,17 @@
                                     {{/banks}}
                                     </select>
                                     <input class="material-icons" type="submit" value="update"
-                                           title="update account type"/>
+                                           title="update value type"/>
                                 </form>
                                 <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
                                 <input class="material-icons unhideForm" type="submit" value="update"
-                                       title="update account type"/>
+                                       title="update value type"/>
                             </td>
                             <td>
                                 <form name="delete" action="/accountType/{{id}}/delete/" method="get">
                                     <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
                                     <input class="material-icons" type="submit" value="delete"
-                                           title="delete account type"/>
+                                           title="delete value type"/>
                                 </form>
                             </td>
                         </tr>
@@ -79,9 +79,9 @@
                 </option>
             {{/banks}}
         </select>
-        <input class="material-icons" type="submit" value="add" title="add account type"/>
+        <input class="material-icons" type="submit" value="add" title="add value type"/>
     </form>
-    <input class="material-icons unhideForm" type="submit" value="add" title="add account type"/>
+    <input class="material-icons unhideForm" type="submit" value="add" title="add value type"/>
 </main>
 <script src="/js/helpers.js"></script>
 <script>
