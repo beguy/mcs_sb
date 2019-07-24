@@ -86,7 +86,7 @@ public class ClientController {
         }
 
         if (predicateConditions.containsKey("accountDate")) {
-            clientTmp.setAccountDate(Date.valueOf(LocalDate.parse(predicateConditions.get("accountDate"))));
+            clientTmp.getAccount().setAccountDate(Date.valueOf(LocalDate.parse(predicateConditions.get("accountDate"))));
             matcher = matcher.withMatcher("accountDate", exact());
         }
 

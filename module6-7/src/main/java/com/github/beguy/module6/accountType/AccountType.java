@@ -2,7 +2,7 @@ package com.github.beguy.module6.accountType;
 
 import com.github.beguy.module6.bank.Bank;
 import com.github.beguy.module6.client.Client;
-import com.github.beguy.module6.core.entity.DomainObject;
+import com.github.beguy.module6.core.entity.NamedDomainObject;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -17,7 +17,7 @@ import java.util.StringJoiner;
 
 @Entity
 @Table(name = "ACCOUNT_TYPE")
-public class AccountType extends DomainObject {
+public class AccountType extends NamedDomainObject {
     @ManyToOne
     @JoinColumn(name = "BANK_ID")
     @NotNull

@@ -1,7 +1,7 @@
 package com.github.beguy.module6.bank;
 
 import com.github.beguy.module6.accountType.AccountType;
-import com.github.beguy.module6.core.entity.DomainObject;
+import com.github.beguy.module6.core.entity.NamedDomainObject;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -13,7 +13,7 @@ import java.util.StringJoiner;
 
 @Entity
 @Table(name = "BANK")
-public class Bank extends DomainObject {
+public class Bank extends NamedDomainObject {
     @OneToMany(mappedBy = "bank", cascade = CascadeType.REMOVE)
     private List<AccountType> accounts = new ArrayList<>();
 

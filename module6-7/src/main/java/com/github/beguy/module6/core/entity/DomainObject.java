@@ -5,8 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import javax.validation.constraints.NotBlank;
-import java.util.StringJoiner;
 
 @MappedSuperclass
 public class DomainObject {
@@ -16,15 +14,7 @@ public class DomainObject {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long id;
 
-    @Column(name = "NAME")
-    @NotBlank(message = "Name is mandatory")
-    protected String name;
-
     public DomainObject() {
-    }
-
-    protected DomainObject(String name) {
-        this.name = name;
     }
 
     public long getId() {
@@ -35,19 +25,8 @@ public class DomainObject {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     @Override
     public String toString() {
-        return new StringJoiner(", ")
-                .add("id=" + id)
-                .add("name='" + name + "'")
-                .toString();
+        return "id=" + id;
     }
 }
