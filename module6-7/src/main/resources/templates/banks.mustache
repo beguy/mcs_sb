@@ -29,6 +29,7 @@
                         <tr>
                             <td>
                                 <form hidden name="edit" action="/bank/save" method="post">
+                                    <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
                                     <input type="hidden" name="id" value="{{id}}"/>
                                     <label>Name <input type="text" name="name" value="{{name}}"/></label>
                                     <input class="material-icons" type="submit" value="update" title="update bank"/>
@@ -38,6 +39,7 @@
                             </td>
                             <td>
                                 <form name="delete" action="/bank/{{id}}/delete/" method="get">
+                                    <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
                                     <input class="material-icons" type="submit" value="delete" title="delete bank"/>
                                 </form>
                             </td>
@@ -49,6 +51,7 @@
 
     <div>
         <form hidden name="bank" action="/bank/save" method="post">
+            <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
             <table class="no-border" style="">
                 <tr>
                     <td>Name: <input type="text" name="name"/><br/></td>

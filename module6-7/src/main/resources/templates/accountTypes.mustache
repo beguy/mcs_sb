@@ -37,6 +37,7 @@
                         <tr>
                             <td>
                                 <form hidden name="edit" action="/accountType/save" method="post">
+                                    <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
                                     <input type="hidden" name="id" value="{{id}}"/>
                                     <label>Name <input type="text" name="name" value="{{name}}"/></label>
                                     <select class="selectWithSynchronizedId
@@ -50,11 +51,13 @@
                                     <input class="material-icons" type="submit" value="update"
                                            title="update account type"/>
                                 </form>
+                                <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
                                 <input class="material-icons unhideForm" type="submit" value="update"
                                        title="update account type"/>
                             </td>
                             <td>
                                 <form name="delete" action="/accountType/{{id}}/delete/" method="get">
+                                    <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
                                     <input class="material-icons" type="submit" value="delete"
                                            title="delete account type"/>
                                 </form>
@@ -67,6 +70,7 @@
     </table>
 
     <form hidden name="accountType" action="/accountType/save" method="post">
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
         <label>Name <input type="text" name="name"/></label>
         <select name="bank.id">
             {{#banks}}

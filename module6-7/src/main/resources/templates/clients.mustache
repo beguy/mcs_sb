@@ -22,7 +22,9 @@
                         <td><a href="/accountTypes">AccountType</a></td>
                         <td>
                             <form id="search" action="/clients/search/" method="get"
-                                  onsubmit="return sendSearchForm(this)"></form>
+                                  onsubmit="return sendSearchForm(this)">
+                                <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+                            </form>
                             <table hidden class="no-border">
                                 <tr>
                                     <td>
@@ -97,6 +99,7 @@
                             <td>
                                 <table hidden>
                                     <form name="edit" action="/client/save" method="post">
+                                        <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
                                         <input type="hidden" name="id" value="{{id}}"/>
                                         <tr>
                                             <td>Name</td>
@@ -144,6 +147,7 @@
 
 
     <form hidden name="client" action="/client/save" method="post">
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
         <table class="no-border">
             <tr>
                 <td>
