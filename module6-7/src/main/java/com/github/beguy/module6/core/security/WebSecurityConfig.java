@@ -20,19 +20,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         String[] resources = new String[]{"/login", "/error", "/banks", "/clients",
                 "/accountTypes", "/css/**", "/js/**", "favicon.ico"};
 
-        http.authorizeRequests()
+        http
+                .authorizeRequests()
                 .antMatchers(resources).permitAll()
-                .anyRequest().authenticated()
+                    .anyRequest().authenticated()
                 .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
+                    .formLogin()
+                    .loginPage("/login")
+                    .permitAll()
                 .and()
-                .logout()
-                .permitAll()
+                    .logout()
+                    .permitAll()
                 .and()
-                .exceptionHandling()
-                .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
+                    .exceptionHandling()
+                    .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
     }
 
     @Bean
