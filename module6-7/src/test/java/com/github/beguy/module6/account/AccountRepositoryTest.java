@@ -4,20 +4,20 @@ package com.github.beguy.module6.account;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static junit.framework.TestCase.assertTrue;
 
 @RunWith(SpringRunner.class)
 @ActiveProfiles("test")
-@DataJpaTest
+@SpringBootTest
 public class AccountRepositoryTest {
     @Autowired
     AccountRepository accountRepository;
@@ -42,7 +42,10 @@ public class AccountRepositoryTest {
         List<Account> accounts = Arrays.asList(accountBeforeDate, accountInDate, accountAfterDate, anotherAccountAfterDate);
         accounts.forEach(account -> account.setAccountDate(startedDate));
         accountRepository.saveAll(accounts);
-        List<Account> finded = accountRepository.findAllByServiceFeeDate(currentDate);
-        assertThat(finded, is(Arrays.asList(accountBeforeDate, accountInDate)));
+        List<Long> findedIds = accountRepository.findAllByServiceFeeDate(currentDate)
+                .stream().map(Account::getId)
+                .collect(Collectors.toList());
+        List<Long> expectedIds = Arrays.asList(accountBeforeDate.getId(), accountInDate.getId());
+        assertTrue(expectedIds.equals(findedIds));
     }
 }

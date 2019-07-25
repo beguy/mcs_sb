@@ -67,7 +67,7 @@
                                 <tr>
                                     <td>
                                         <input disabled form="search" class="todayDatePicker" type="date"
-                                               name="accountDate">
+                                               name="account.accountDate">
                                     </td>
                                     <td>
                                         <input form="search" class="material-icons" type="submit" value="filter_list"
@@ -77,7 +77,7 @@
                             </table>
                             <input class="material-icons unhideForm" type="submit" value="filter_list"
                                    title="filter by value date"
-                                   onclick="document.forms.search['accountDate'].disabled = false;">
+                                   onclick="document.forms.search['account.accountDate'].disabled = false;">
                         </td>
                     </tr>
                 </table>
@@ -93,7 +93,7 @@
                     <p title="id = {{id}}">{{name}}</p>
                 {{/accountType}}
                 </td>
-                <td>{{accountDate}}</td>
+                <td>{{account.accountDate}}</td>
                 <td>{{account.value}}</td>
                 <td>
                     <table class="no-border">
@@ -122,7 +122,7 @@
                                         </tr>
                                         <tr>
                                             <td>Account Date</td>
-                                            <td><input type="date" name="accountDate" value="{{accountDate}}"></td>
+                                            <td><input type="date" name="account.accountDate" value="{{account.accountDate}}"></td>
                                         </tr>
                                         <tr>
                                             <td>Account</td>
@@ -189,7 +189,7 @@
             </tr>
             <tr>
                 <td>Account Date</td>
-                <td><input type="date" class="todayDatePicker" name="accountDate"></td>
+                <td><input type="date" class="todayDatePicker" name="account.accountDate"></td>
             </tr>
             <tr>
                 <td>Account</td>
@@ -271,7 +271,7 @@
 
     function setFormInputDateToday() {
         Array.from(document.getElementsByClassName('todayDatePicker')).forEach(
-                inputDate => inputDate.valueAsDate = new Date()
+                inputDate => inputDate.valueAsDate = new Date();
         )
     }
 
