@@ -122,7 +122,8 @@
                                         </tr>
                                         <tr>
                                             <td>Account Date</td>
-                                            <td><input type="date" name="account.accountDate" value="{{account.accountDate}}"></td>
+                                            <td><input type="date" name="account.accountDate"
+                                                       value="{{account.accountDate}}"></td>
                                         </tr>
                                         <tr>
                                             <td>Account</td>
@@ -271,8 +272,7 @@
 
     function setFormInputDateToday() {
         Array.from(document.getElementsByClassName('todayDatePicker')).forEach(
-                inputDate => inputDate.valueAsDate = new Date();
-        )
+                inputDate=>inputDate.valueAsDate = new Date())
     }
 
     removeDuplicatesInAccountTypeSearchSelect();
