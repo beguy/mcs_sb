@@ -30,19 +30,23 @@ public class AccountServiceImpl implements AccountService {
     @Transactional(isolation = Isolation.READ_COMMITTED)
     public void chargeAllServiceFeeForDate(Date date) {
         List<Account> allByServiceFeeDate = accountRepository.findAllByServiceFeeDate(date);
-        allByServiceFeeDate.forEach(account -> thiz.chargeServiceFee(account));
+        allByServiceFeeDate.forEach(account -> {
+            this.chargeServiceFee(account);
+            account.setLastFeeChargeDate(date);
+        });
         accountRepository.saveAll(allByServiceFeeDate);
     }
 
     public void chargeServiceFee(Account account){
-        BigDecimal currentAccount = account.getValue();
-        // current = current - current * (percent/100)
-        //                     /\service fee/\
-        BigDecimal serviceFee = currentAccount.multiply(account.getServiceFeePercent().divide(new BigDecimal(100)));
-        currentAccount = currentAccount.subtract(serviceFee);
-        BigDecimal minimalAccountForServiceFee = account.getMinimalAccountForServiceFee();
-        // current > minimal
-        if (currentAccount.compareTo(minimalAccountForServiceFee) > 0)
-            account.setValue(currentAccount);
+        BigDecimal tmpValue = account.getValue();
+        // tmpValue = tmpValue - tmpValue * (percent/100)
+        //                        /\service fee/\
+        BigDecimal serviceFee = tmpValue.multiply(account.getServiceFeePercent().divide(new BigDecimal(100)));
+        tmpValue = tmpValue.subtract(serviceFee);
+        BigDecimal minimalAccountForServiceFee = account.getMinimalValueForServiceFee();
+        // tmpValue > minimalValue
+        if (tmpValue.compareTo(minimalAccountForServiceFee) > 0) {
+            account.setValue(tmpValue);
+        }
     }
 }

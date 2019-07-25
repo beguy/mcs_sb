@@ -28,7 +28,7 @@ public class Account extends DomainObject {
     @Column(name = "SERVICE_PERIOD")
     private long serviceFeePeriod;
     @Column(name = "MINIMAL_ACCOUNT_FOR_SERVICE_FEE")
-    private BigDecimal minimalAccountForServiceFee;
+    private BigDecimal minimalValueForServiceFee;
     @OneToOne(mappedBy = "account")
     private Client client;
 
@@ -49,12 +49,12 @@ public class Account extends DomainObject {
         this.accountDate = accountDate;
     }
 
-    public BigDecimal getMinimalAccountForServiceFee() {
-        return minimalAccountForServiceFee;
+    public BigDecimal getMinimalValueForServiceFee() {
+        return minimalValueForServiceFee;
     }
 
-    public void setMinimalAccountForServiceFee(BigDecimal minimalAccountForServiceFee) {
-        this.minimalAccountForServiceFee = minimalAccountForServiceFee;
+    public void setMinimalValueForServiceFee(BigDecimal minimalValueForServiceFee) {
+        this.minimalValueForServiceFee = minimalValueForServiceFee;
     }
 
     public BigDecimal getServiceFeePercent() {
