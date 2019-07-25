@@ -17,8 +17,8 @@ import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        String[] resources = new String[]{"/login", "/", "/error", "/banks", "/clients",
-                "/accountTypes", "/css/**", "/js/**", "favicon.ico"};
+        String[] resources = new String[]{"/login", "/", "/error", "/banks/**", "/clients/**",
+                "/accountTypes/**", "/css/**", "/js/**", "/favicon.ico"};
 
         http
                 .authorizeRequests()
