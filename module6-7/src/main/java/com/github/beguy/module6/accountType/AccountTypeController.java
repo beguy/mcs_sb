@@ -23,7 +23,7 @@ public class AccountTypeController {
     public String showAll(Model model) {
         model.addAttribute("accountTypeInfo", accountTypeRepository.getAllInfo());
         model.addAttribute("banks", bankRepository.findAll());
-        return "/accountTypes";
+        return "accountTypes";
     }
 
     @GetMapping("/accountType/{id}/delete/")
@@ -36,7 +36,7 @@ public class AccountTypeController {
     public String save(@Valid AccountType accountType, BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("error", "can't add this accountType " + accountType);
-            return "/error";
+            return "error";
         }
 
         accountTypeRepository.save(accountType);

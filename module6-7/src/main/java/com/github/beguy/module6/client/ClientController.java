@@ -97,7 +97,7 @@ public class ClientController {
         model.addAttribute("accountTypes", accountTypeRepository.findAll());
         model.addAttribute("clients", clientRepository.findAll(example));
 
-        return "/clients";
+        return "clients";
     }
 
 
@@ -105,7 +105,7 @@ public class ClientController {
     public String showAll(Model model) {
         model.addAttribute("accountTypes", accountTypeRepository.findAll());
         model.addAttribute("clients", clientRepository.findAll());
-        return "/clients";
+        return "clients";
     }
 
     @GetMapping("/client/{id}/delete/")
@@ -118,7 +118,7 @@ public class ClientController {
     public String save(@Valid Client client, BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("error", "can't add this client " + client);
-            return "/error";
+            return "error";
         }
 
         clientRepository.save(client);

@@ -18,7 +18,7 @@ public class BankController {
     @GetMapping("/banks")
     public String showAll(Model model) {
         model.addAttribute("banks", bankRepository.findAll());
-        return "/banks";
+        return "banks";
     }
 
     @GetMapping("/bank/{id}/delete/")
